@@ -40,7 +40,7 @@ WAVE_VERTICAL_DISPLACEMENT = np.array([])
 
 # For original, low detail wave data
 WAVE_TIME_COARSE = np.array([])
-WAVE_VERTICAL_DISPLCEMENT_COARSE = np.array([])
+WAVE_VERTICAL_DISPLACEMENTCEMENT_COARSE = np.array([])
 wave_interp = None  # Will hold interpolation function
 
 # Data Classes
@@ -55,4 +55,4 @@ class BuoyProperties:
     m_added: float         # kg
     c_rad: float           # Ns/m
     k_drag: float          # kg/m
-    eta_pto: float         # efficiency (0-1)
+    eta_pto: float         # efficiency (0-1) 

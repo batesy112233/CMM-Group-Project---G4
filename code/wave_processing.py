@@ -16,7 +16,7 @@ def analyze_and_prepare_wave_data(file_path: str, dt_step: float = 0.1) -> bool:
     
     try:
         logger.info(f"Loading wave data from: {file_path}")
-        data = pd.read_csv('wave_elevation_data.csv', delimiter=',')
+        data = pd.read_csv(file_path, delimiter=',')
         
         # Validate required columns
         if 'Time_s' not in data.columns or 'Probe1_Elevation_m' not in data.columns:
