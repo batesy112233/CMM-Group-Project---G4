@@ -1,113 +1,117 @@
+"""
+Main module.
+Performs the optimization and simulation process.
+
+"""
 import numpy as np
-from scipy.optimize import minimize
-from scipy.integrate import solve_ivp
+from scipy.optimize import minimize, differential_evolution
 import sys
+import logging
 
 # Import all functions and variables from other files
-from config import *
+import config
 from wave_processing import analyze_and_prepare_wave_data, create_forcing_function
-from physics import calculate_added_mass, calculate_radiation_damping, calculate_viscous_drag_coefficient
-from dynamics import buoy_equation_of_motion_enhanced
-from optimization import objective_function_enhanced
+from physics import create_buoy_properties
+from simulation import run_simulation
+from optimization import objective_function
 from analysis import find_max_acceleration
-from visualization import plot_results_enhanced
+from visualization import plot_results
 
-if __name__ == "__main__":
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+def main():
     
     # Initialize and load data
-    print("="*60)
-    print("WAVE ENERGY BUOY OPTIMIZATION")
-    print("="*60)
+    logger.info("="*60)
+    logger.info("WAVE ENERGY BUOY OPTIMIZATION")
+    logger.info("="*60)
+    
+    # Get file path from command line or use default
+    if len(sys.argv) > 1:
+        file_path = sys.argv[1]
+    else:
+        file_path = "wave_data_final.csv"
+        logger.info(f"No file path provided, using default: {file_path}")
     
     # Call function to read, clean and resample the wave data
-    try:
-        analyze_and_prepare_wave_data(dt_step=0.1)
-    except Exception as e:
-        print(f"Could not analyze wave data: {e}")
+    if not analyze_and_prepare_wave_data(file_path, dt_step=0.1):
+        logger.error("Failed to load wave data. Exiting.")
         sys.exit(1)
     
-    # Calculate fixed physical parameters
-    buoy_diameter = 8.0
-    buoy_height = 6.0
+    # Create buoy properties
+    buoy_props = create_buoy_properties(diameter=8.0, height=6.0, eta_pto=0.90)
     
-    # Calculate waterplane area assuming a cylinder
-    buoy_area = np.pi * (buoy_diameter / 2.0)**2
+    logger.info(f"\nBuoy Properties:")
+    logger.info(f"  Diameter: {buoy_props.diameter} m")
+    logger.info(f"  Draft: {buoy_props.height} m")
+    logger.info(f"  Waterplane Area: {buoy_props.area:.2f} m²")
+    logger.info(f"  Hydrostatic stiffness: {buoy_props.k_hydrostatic:.0f} N/m")
+    logger.info(f"  Added mass: {buoy_props.m_added:.0f} kg")
+    logger.info(f"  Radiation damping: {buoy_props.c_rad:.0f} Ns/m")
+    logger.info(f"  Drag coefficient: {buoy_props.k_drag:.2f} kg/m")
+    logger.info(f"  PTO efficiency: {buoy_props.eta_pto*100:.0f}%")
     
-    # Calculate the hydrostatic stiffness
-    k_hydrostatic = RHO_WATER * G * buoy_area
+    # Optimize
+    x0 = [np.mean(config.MASS_BOUNDS), np.mean(config.DAMPING_BOUNDS)]
+    bounds = [config.MASS_BOUNDS, config.DAMPING_BOUNDS]
     
-    # Calculate hydrodynamiccoefficients based on geometry 
-    m_added = calculate_added_mass(buoy_diameter, buoy_height)
-    c_rad = calculate_radiation_damping(buoy_diameter, omega_peak=0.8)
-    k_drag = calculate_viscous_drag_coefficient(buoy_diameter)
-    eta_pto = 0.90
+    logger.info(f"\nStarting optimization (Differential Evolution)...")
+    logger.info(f"Initial guess: m={x0[0]:.0f} kg, c={x0[1]:.0f} Ns/m")
     
-    # print calculated parameters to the console
-    print(f"\nBuoy Diameter: {buoy_diameter} m")
-    print(f"Added mass: {m_added:.0f} kg")
-    print(f"Radiation damping: {c_rad:.0f} Ns/m")
-    print(f"Drag coefficient: {k_drag:.2f} kg/m")
-    
-    # Setup the optimization
-    x0 = [np.mean(MASS_BOUNDS), np.mean(DAMPING_BOUNDS)]
-    bounds = [MASS_BOUNDS, DAMPING_BOUNDS]
-    
-    print("\nStarting optimization...")
-    
-    # Call the minimize function to find best parameters
-    result = minimize(
-        objective_function_enhanced,
-        x0,
-        args=(k_hydrostatic, m_added, c_rad, k_drag, eta_pto),
-        method='Nelder-Mead',
-        options={'xatol': 1e-3, 'fatol': 1.0, 'disp': True, 'maxiter': 200} # Optomizer settings
+    result = differential_evolution(
+        objective_function,
+        bounds,
+        args=(buoy_props,),
+        strategy='best1bin', # The standard strategy
+        maxiter=10,          # Generations (lower this if it takes too long)
+        popsize=5,          # Population size (higher = more searching, slower)
+        tol=0.1,            # Tolerance for convergence
+        disp=True            # Print progress
     )
     
-    # Process and display results
     if result.success:
-        # Get optimal parameters from result
+        logger.info("\n" + "="*60)
+        logger.info("OPTIMIZATION SUCCESSFUL")
+        logger.info("="*60)
+        
         opt_mass, opt_damping = result.x
-        max_power_electrical = -result.fun # Flip sign since -power was minimized
+        max_power_electrical = -result.fun
         
-        # Print final optimal values
-        print(f"\nOptimal Mass: {opt_mass:.0f} kg")
-        print(f"Optimal Damping: {opt_damping:.0f} Ns/m")
-        print(f"Electrical Power: {max_power_electrical / 1000.0:.2f} kW")
+        logger.info(f"\nOptimal Parameters:")
+        logger.info(f"  Buoy Mass: {opt_mass:.0f} kg")
+        logger.info(f"  Total Mass: {opt_mass + buoy_props.m_added:.0f} kg")
+        logger.info(f"  PTO Damping: {opt_damping:.0f} Ns/m")
+        logger.info(f"  Electrical Power: {max_power_electrical/1000.0:.2f} kW")
+        logger.info(f"  Annual Energy: ~{max_power_electrical * 8.76:.0f} MWh/year")
         
-        # Re-run final simulation for plotting
-        t_span = [WAVE_TIME[0], WAVE_TIME[-1]] # Set time range
-        t_eval = np.linspace(t_span[0], t_span[1], 5000) 
-        y0 = [0, 0] # Set initial conditions
+        # Run final simulation
+        logger.info("\nRunning final simulation...")
         
-        # Run ODE solver with optimal parameters
-        sol_optimal = solve_ivp(
-            buoy_equation_of_motion_enhanced, # Physics function
-            t_span, # Time range
-            y0, # Initial state
-            method='RK45', # Use runge-kutta sovler
-            args=(opt_mass, opt_damping, k_hydrostatic, m_added, c_rad, k_drag, eta_pto),
-            t_eval=t_eval,
-            max_step=0.5 # Limits time step for stability
-        )
+        sol = run_simulation(opt_mass, opt_damping, buoy_props)
         
-        # If final simulation was succesful
-        if sol_optimal.success:
-            # Extract position and velocity from the solution
-            z_optimal = sol_optimal.y[0]
-            z_dot_optimal = sol_optimal.y[1]
-            # Recalculate the wave force 
-            forcing_function_optimal = create_forcing_function(t_eval, k_hydrostatic)
+        if sol.success:
+            # Evaluate solution for plotting
+            t_eval = np.linspace(config.WAVE_TIME[0], config.WAVE_TIME[-1], config.EVAL_POINTS)
+            z_optimal = sol.sol(t_eval)[0]
+            z_dot_optimal = sol.sol(t_eval)[1]
+            forcing = np.array([create_forcing_function(t, buoy_props.k_hydrostatic) for t in t_eval])
             
-            # Call analysis function to find peak acceleration
             max_accel_t, max_accel_a = find_max_acceleration(
-                t_eval, z_optimal, z_dot_optimal, opt_mass, opt_damping,
-                k_hydrostatic, m_added, c_rad, k_drag, eta_pto
+                t_eval, z_optimal, z_dot_optimal, opt_mass, opt_damping, buoy_props
             )
             
-            # Call the visualization function to create and show all plots
-            plot_results_enhanced(t_eval, z_optimal, z_dot_optimal, forcing_function_optimal,
-                                opt_mass, m_added, opt_damping, c_rad, k_drag,
-                                max_accel_t, max_accel_a, buoy_diameter)
+            plot_results(t_eval, z_optimal, z_dot_optimal, forcing, opt_mass, 
+                        buoy_props, opt_damping, max_accel_t, max_accel_a)
+        else:
+            logger.error("Final simulation failed")
     else:
-        # If optimization fails print failure message
-        print("\nOptimization failed")
+        logger.error("Optimization failed")
+        logger.error(result.message)
+
+if __name__ == "__main__":
+    main()
