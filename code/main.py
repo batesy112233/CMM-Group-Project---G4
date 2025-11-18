@@ -35,7 +35,7 @@ def main():
     if len(sys.argv) > 1:
         file_path = sys.argv[1]
     else:
-        file_path = "wave_data_final.csv"
+        file_path = "wave_elevation_data.csv"
         logger.info(f"No file path provided, using default: {file_path}")
     
     # Call function to read, clean and resample the wave data
@@ -68,10 +68,11 @@ def main():
         bounds,
         args=(buoy_props,),
         strategy='best1bin', # The standard strategy
-        maxiter=10,          # Generations (lower this if it takes too long)
-        popsize=5,          # Population size (higher = more searching, slower)
-        tol=0.1,            # Tolerance for convergence
-        disp=True            # Print progress
+        maxiter=10, # Generations 
+        popsize=5, # Population size 
+        tol=0.1, # Tolerance for convergence
+        seed=25,
+        disp=True # Print progress
     )
     
     if result.success:
@@ -87,7 +88,7 @@ def main():
         logger.info(f"  Total Mass: {opt_mass + buoy_props.m_added:.0f} kg")
         logger.info(f"  PTO Damping: {opt_damping:.0f} Ns/m")
         logger.info(f"  Electrical Power: {max_power_electrical/1000.0:.2f} kW")
-        logger.info(f"  Annual Energy: ~{max_power_electrical * 8.76:.0f} MWh/year")
+        logger.info(f"  Annual Energy: ~{(max_power_electrical * 8760) / 1e6:.0f} MWh/year")
         
         # Run final simulation
         logger.info("\nRunning final simulation...")
