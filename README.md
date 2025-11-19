@@ -15,7 +15,7 @@
 
 ## Project Overview
 
- This system models a floating buoy that generates power through vertical oscillation in the North Sea. This repository contains the source code for this model and numerical modelling, focused on the optimization of a Point Absorber Wave Energy Converter (PAWEC).
+This system models a floating buoy that generates power through vertical oscillation in the North Sea. This repository contains the source code for this model and numerical modelling, focused on the optimization of a Point Absorber Wave Energy Converter (PAWEC).
 
 The objective of this software is to maximize the average power capture from irregular North Sea wave conditions while maintaining structural integrity. 
 
@@ -27,6 +27,8 @@ The optimization strategy involves tuning two design parameters: the Buoy's Mass
 - [Numerical Methods & Implementation](#numerical-methods--implementation)
 - [Repository Structure](#repository-structure)
 
+<br>
+
 ## Installation and Setup
 
 ### Installation
@@ -35,8 +37,8 @@ The optimization strategy involves tuning two design parameters: the Buoy's Mass
 2. Click ***Code → Download ZIP***.
 3. Extract the ZIP file to a folder of your choice on your computer.
 ### Dependencies
-
-Make sure these Python libraries are installed on your system:
+Use an IDE ___ie. Spyder(reccomended)___ to run the code.  
+Before running, make sure these Python libraries are installed on your system:
 
 * NumPy
 * SciPy
@@ -48,27 +50,28 @@ If any are missing, you can download then using your chosen IDE's package manage
 ```bash
 pip install numpy scipy matplotlib pandas 
 ```
-Spyder is the reccomended IDE to use. If using VS Code, Anaconda or Spyder, these are likely already installed.
+If you're using VS Code, Anaconda or Spyder, these are likely already installed.
 ### Running the model
  
 * Open the project in your IDE
-* Run the file using your IDE's run command
+* Run the file **`main.py`** using your IDE's run command
 
 ### Expected Result
-* Excecuting main.py should:
+* Excecuting `main.py` should:
 
     * Load the included wave elevation dataset
     * Process and interpolate the input wave signal
     * Construct buoy and hydrodynamic parameters
-    * Perform a time-domain simulation using RK45
+    * Perform a time-domain simulation using RK45 
     * Carry out mass/damping optimization
     * Check structural acceleration limits
     * Produce visual output files under `buoy_results.png`
+    * Produce a visual output under PLOTS on Spyder
 <br>
 
 ## Numerical Methods & Implementation
 
-This project employs sophisticated numerical methods to handle the irregular nature of ocean waves and solve the complex hydrodynamic equations governing buoy motion.
+This project employs the following numerical methods to handle the irregular nature of ocean waves and solves the hydrodynamic equations governing buoy motion.
 
 | Algorithm | Methodology | Application | Implementation File |
 | :--- | :--- | :--- | :--- |
@@ -103,7 +106,7 @@ This project employs sophisticated numerical methods to handle the irregular nat
 
 ## Repository Structure
 
-The following table show what each python file does.
+The following table shows what each python file does.
 
 ### Core Simulation & Physics
 
@@ -135,6 +138,6 @@ The following table show what each python file does.
 ### Data Files
 | File | Purpose |
 | :--- | :--- |
-| **`wave_elevation_data.csv`** | Raw, Real North Sea wave elevation measurements |
+| **`wave_elevation_data.csv`** | Contains a set of raw, real North Sea wave elevation measurements |
 | **`buoy_results.png`** | Visualization of optimization results including wave elevation, forcing functions, hydrodynamic forces, buoy response, and power generation |
 <br>
