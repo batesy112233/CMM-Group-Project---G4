@@ -25,7 +25,6 @@ The optimization strategy involves tuning two design parameters: the Buoy's Mass
 - [Installation and Setup](#installation-and-setup)
 - [Numerical Methods & Implementation](#numerical-methods--implementation)
 - [Repository Structure](#repository-structure)
-- [Authors](#authors)
 - [License](#license)
 
 <br>
