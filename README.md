@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://media.istockphoto.com/id/1473655434/vector/wave-energy-converter-buoy.jpg?s=2048x2048&w=is&k=20&c=tw4Kj6X6CHWMG_jDGayB0nW2KXpJG9motJeE3gFCFrA=" alt="PAWEC Project Banner" style="border-radius: 5px; width: 100%; max-height: 200px; object-fit: cover; object-position: top;">
+  <img src="https://media.istockphoto.com/id/1473655434/vector/wave-energy-converter-buoy.jpg?s=2048x2048&w=is&k=20&c=tw4Kj6X6CHWMG_jDGayB0nW2KXpJG9motJeE3gFCFrA=" alt="PAWEC Project Banner" style="border-radius: 5px; width: 100%; max-height: 200px; object-fit: cover; object-position: top 50%;">
   <p><em>Numerical Modelling and Optimization for Point Absorber Wave Energy Converters</em></p>
 </div>
 
