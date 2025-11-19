@@ -25,11 +25,13 @@ The optimization strategy involves tuning two design parameters: the Buoy's Mass
 - [Installation and Setup](#installation-and-setup)
 - [Numerical Methods & Implementation](#numerical-methods--implementation)
 - [Repository Structure](#repository-structure)
+- [Authors](#authors)
+- [License](#license)
 
 <br>
 
 ## Installation and Setup
-You must have python 3.10 or newer installed in your system
+You must have Python 3.8 or newer installed in your system
 ### Installation
 
 1. Go to the project's GitHub page.
@@ -39,11 +41,11 @@ You must have python 3.10 or newer installed in your system
 **OR**  
 
 1. Open your terminal or command prompt.
-2. Navigate to the directory where you want to store the project. ie type:
+2. Navigate to the directory where you want to store the project. e.g., type and run:
 ```bash
 cd Downloads
 ```
-3. Execute the git clone command then go to the directory:
+3. Execute the git clone command, then go to the directory:
 ```bash
 git clone https://github.com/batesy112233/CMM-Group-Project---G4
 ```
@@ -51,7 +53,7 @@ git clone https://github.com/batesy112233/CMM-Group-Project---G4
 cd CMM-Group-Project---G4
 ```
 ### Dependencies
-Use an IDE ___ie. Spyder(recomended)___ to run the code.  
+Use an IDE (ie. ___Spyder___ ,recommended) to run the code.  
 Before running, make sure these Python libraries are installed on your system:
 
 * NumPy
@@ -59,21 +61,21 @@ Before running, make sure these Python libraries are installed on your system:
 * Matplotlib
 * Pandas
 
-If any are missing/want to check in case, you can download then using your chosen IDE's package manager or terminal by running this:
+If any are missing/want to check in case, you can download them using your chosen IDE's package manager or terminal by running this:
 
 **On Anaconda Prompt:**
 ```bash
-conda install numpy pandas
+conda install numpy scipy matplotlib pandas
 ```
 **On Command Prompt:**
 ```bash
 python -m pip install numpy scipy matplotlib pandas
 ```
-_If you get the error: command `python` is not found, change "python" in the above command to the file path of where python is installed on your pc._
-_ie: instead of python main.py, C:\Users\Kimondo\AppData\Local\Programs\Python\Python312\python.exe" main.py_
+_If you get the error: command `python` is not found, change "python"  to the file path of where Python is installed on your system._
+_i.e.: instead of python main.py, C:\Users\YourUserName\AppData\Local\Programs\Python\Python312\python.exe" main.py_
 ### Running the model
  
-* Open the project folder 'code' under 'CMM-Group-Project---G4' ,in your IDE 
+* Open the project folder 'code' under 'CMM-Group-Project---G4' in your IDE 
 * Run the file **`main.py`** using your IDE's run command
 
 **OR**  
@@ -81,20 +83,19 @@ _ie: instead of python main.py, C:\Users\Kimondo\AppData\Local\Programs\Python\P
 ```bash
 cd code
 ```
-* Excecute the main file
+* Execute the main file
 
 ```bash
 python main.py
 ```
-_If you get the error: command `python` is not found, change "python" in the above command to the file path of where python is installed on your pc._  
-_ie: instead of python main.py, C:\Users\Kimondo\AppData\Local\Programs\Python\Python312\python.exe" main.py_
-### Expected Result
-* Excecuting `main.py` should:
 
-  * Loads wave elevation data
-  * Runs time-domain simulation & optimization
-  * Checks acceleration limits
-  * Outputs figures to `buoy_results.png`
+### Expected Result
+* Executing `main.py` should:
+
+  * Load wave elevation data
+  * Run time-domain simulation & optimization
+  * Check acceleration limits
+  * Output figures to `buoy_results.png`
 <br>
 
 ## Numerical Methods & Implementation
@@ -163,3 +164,6 @@ The following table shows what each python file does.
 | **`wave_elevation_data.csv`** | Contains a set of raw, real North Sea wave elevation measurements |
 | **`buoy_results.png`** | Visualization of optimization results including wave elevation, forcing functions, hydrodynamic forces, buoy response, and power generation |
 <br>
+
+## License
+This project is licensed under the MIT License.
