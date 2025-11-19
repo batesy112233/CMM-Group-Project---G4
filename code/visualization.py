@@ -45,6 +45,7 @@ def plot_results(t_eval: np.ndarray, z_optimal: np.ndarray, z_dot_optimal: np.nd
                 color='b', linewidth=1.5)
     axes[0].set_title('Wave Elevation Data')
     axes[0].set_ylabel('Elevation (m)')
+    axes[0].set_xlabel('Time (s)')
     axes[0].legend()
     axes[0].grid(True, alpha=0.3)
     
@@ -53,6 +54,7 @@ def plot_results(t_eval: np.ndarray, z_optimal: np.ndarray, z_dot_optimal: np.nd
     axes[1].axhline(0, color='k', linestyle='-', linewidth=0.5, alpha=0.3)
     axes[1].set_title('Wave Forcing')
     axes[1].set_ylabel('Force (kN)')
+    axes[1].set_xlabel('Time (s)')
     axes[1].grid(True, alpha=0.3)
     
     # Plot 3: Hydrostatic Force
@@ -60,6 +62,7 @@ def plot_results(t_eval: np.ndarray, z_optimal: np.ndarray, z_dot_optimal: np.nd
     axes[2].axhline(0, color='k', linestyle='-', linewidth=0.5, alpha=0.3)
     axes[2].set_title('Hydrostatic Restoring Force')
     axes[2].set_ylabel('Force (kN)')
+    axes[2].set_xlabel('Time (s)')
     axes[2].grid(True, alpha=0.3)
     
     # Plot 4: PTO Force
@@ -69,6 +72,7 @@ def plot_results(t_eval: np.ndarray, z_optimal: np.ndarray, z_dot_optimal: np.nd
     axes[3].axhline(-config.MAX_PTO_FORCE/1000, color='red', linestyle=':', alpha=0.5, linewidth=2)
     axes[3].set_title('PTO Damping Force')
     axes[3].set_ylabel('Force (kN)')
+    axes[3].set_xlabel('Time (s)')
     axes[3].grid(True, alpha=0.3)
     
     # Plot 5: Radiation Damping
@@ -76,6 +80,7 @@ def plot_results(t_eval: np.ndarray, z_optimal: np.ndarray, z_dot_optimal: np.nd
     axes[4].axhline(0, color='k', linestyle='-', linewidth=0.5, alpha=0.3)
     axes[4].set_title(f'Radiation Damping ({"ENABLED" if config.RADIATION_DAMPING else "DISABLED"})')
     axes[4].set_ylabel('Force (kN)')
+    axes[4].set_xlabel('Time (s)')
     axes[4].grid(True, alpha=0.3)
     
     # Plot 6: Viscous Drag
@@ -83,6 +88,7 @@ def plot_results(t_eval: np.ndarray, z_optimal: np.ndarray, z_dot_optimal: np.nd
     axes[5].axhline(0, color='k', linestyle='-', linewidth=0.5, alpha=0.3)
     axes[5].set_title(f'Viscous Drag ({"ENABLED" if config.VISCOUS_DRAG else "DISABLED"})')
     axes[5].set_ylabel('Force (kN)')
+    axes[5].set_xlabel('Time (s)')
     axes[5].grid(True, alpha=0.3)
     
     # Plot 7: Acceleration
@@ -96,6 +102,7 @@ def plot_results(t_eval: np.ndarray, z_optimal: np.ndarray, z_dot_optimal: np.nd
                     f'{max_accel_value:.1f} m/s²', fontsize=9, ha='center', color='red')
     axes[6].set_title('Buoy Acceleration')
     axes[6].set_ylabel('Accel (m/s²)')
+    axes[6].set_xlabel('Time (s)')
     axes[6].grid(True, alpha=0.3)
     
     # Plot 8: Position & Velocity
@@ -107,6 +114,7 @@ def plot_results(t_eval: np.ndarray, z_optimal: np.ndarray, z_dot_optimal: np.nd
     axes[7].set_title(f'Buoy Response (m_total = {m_buoy + buoy_props.m_added:.0f} kg)')
     axes[7].set_ylabel('Position (m)', color='r')
     ax8_twin.set_ylabel('Velocity (m/s)', color='purple')
+    axes[7].set_xlabel('Time (s)')
     axes[7].grid(True, alpha=0.3)
     
     # Plot 9: Power
