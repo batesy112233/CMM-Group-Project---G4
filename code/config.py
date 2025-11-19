@@ -30,7 +30,7 @@ DAMPING_BOUNDS = (10000.0, 1000000.0) # (min_damping, max_damping)
 
 # Physical Limits of buoy
 MAX_DISPLACEMENT = 3.5 # Max distance the buoy can move vertically (meters)
-MAX_PTO_FORCE = 1_500_000.0 # Max force the generator can withstand (Newtons)
+MAX_PTO_FORCE = 1_000_000.0 # Max force the generator can withstand (Newtons)
 
 # Generate lists to be filled with data from wave data file
 

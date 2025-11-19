@@ -71,7 +71,7 @@ def main():
         maxiter=10, # Generations 
         popsize=5, # Population size 
         tol=0.1, # Tolerance for convergence
-        seed=25,
+        seed=18,
         disp=True # Print progress
     )
     
