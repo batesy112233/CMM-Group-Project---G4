@@ -3,12 +3,12 @@
     src="https://cdn.offshorewind.biz/wp-content/uploads/sites/6/2018/08/02153924/american-wave-powered-buoy-reaches-the-adriatic.jpg" 
     alt="PAWEC Project Banner"
     width="800"
+    height="300"
+    style="border-radius: 10px;"
   />
   <p><em>Numerical Modelling and Optimization for Point Absorber Wave Energy Converters</em></p>
 </div>
-[![Python](https://img.shields.io/badge/python-3%2B-blue.svg)](https://www.python.org/)
-[![Method](https://img.shields.io/badge/solver-RK45-orange.svg)]()
-[![Documentation](https://img.shields.io/badge/docs-pdf-lightgrey.svg)](CMM3_Group_Project.pdf)
+[![Python](https://img.shields.io/pypi/pyversions/tensorflow.svg)](https://badge.fury.io/py/tensorflow)
 
 </div>
 
