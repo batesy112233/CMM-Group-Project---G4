@@ -2,15 +2,16 @@
   <img 
     src="https://cdn.offshorewind.biz/wp-content/uploads/sites/6/2018/08/02153924/american-wave-powered-buoy-reaches-the-adriatic.jpg" 
     alt="PAWEC Project Banner"
-    width="800"
+    width="1000"
+    height="600"
+    style="border-radius: 10px;"
   />
   <p><em>Numerical Modelling and Optimization for Point Absorber Wave Energy Converters</em></p>
 </div>
-[![Python](https://img.shields.io/badge/python-3%2B-blue.svg)](https://www.python.org/)
-[![Method](https://img.shields.io/badge/solver-RK45-orange.svg)]()
-[![Documentation](https://img.shields.io/badge/docs-pdf-lightgrey.svg)](CMM3_Group_Project.pdf)
 
-</div>
+[![Python](https://img.shields.io/pypi/pyversions/tensorflow.svg)](https://badge.fury.io/py/tensorflow)
+[![Build Linux](https://github.com/nasa/cfs/actions/workflows/build-cfs.yml/badge.svg)](https://github.com/nasa/cfs/actions/workflows/build-cfs.yml)
+[![Build RTEMS 5](https://github.com/nasa/cFS/actions/workflows/build-cfs-rtems5.yml/badge.svg)](https://github.com/nasa/cFS/actions/workflows/build-cfs-rtems5.yml)
 
 ## Project Overview
 
@@ -30,25 +31,39 @@ The optimization strategy involves tuning two design parameters: the Buoy's Mass
 
 ### Installation
 
-Clone the repository:
-
-```bash
-git clone [https://github.com/batesy112233/CMM-Group-Project.git](https://github.com/batesy112233/CMM-Group-Project.git)
-```
-
-
+1. Go to the project's GitHub page.
+2. Click ***Code → Download ZIP***.
+3. Extract the ZIP file to a folder of your choice on your computer.
 ### Dependencies
 
-The project requires the standard scientific Python stack that can be installed using pip:
+Make sure these Python libraries are installed on your system:
 
 * NumPy
 * SciPy
 * Matplotlib
+* Pandas
+
+If any are missing, you can download then using your chosen IDE's package manager or terminal by running this:
 
 ```bash
-pip install numpy scipy matplotlib pandas
+pip install numpy scipy matplotlib pandas 
 ```
+Spyder is the reccomended IDE to use. If using VS Code, Anaconda or Spyder, these are likely already installed.
+### Running the model
+ 
+* Open the project in your IDE
+* Run the file using your IDE's run command
 
+### Expected Result
+* Excecuting main.py should:
+
+    * Load the included wave elevation dataset
+    * Process and interpolate the input wave signal
+    * Construct buoy and hydrodynamic parameters
+    * Perform a time-domain simulation using RK45
+    * Carry out mass/damping optimization
+    * Check structural acceleration limits
+    * Produce visual output files under `buoy_results.png`
 <br>
 
 ## Numerical Methods & Implementation
@@ -123,5 +138,3 @@ The following table show what each python file does.
 | **`wave_elevation_data.csv`** | Raw, Real North Sea wave elevation measurements |
 | **`buoy_results.png`** | Visualization of optimization results including wave elevation, forcing functions, hydrodynamic forces, buoy response, and power generation |
 <br>
-
-
