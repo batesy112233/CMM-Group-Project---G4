@@ -9,6 +9,10 @@
   <p><em>Numerical Modelling and Optimization for Point Absorber Wave Energy Converters</em></p>
 </div>
 
+[![Python](https://img.shields.io/pypi/pyversions/tensorflow.svg)](https://badge.fury.io/py/tensorflow)
+[![Build Linux](https://github.com/nasa/cfs/actions/workflows/build-cfs.yml/badge.svg)](https://github.com/nasa/cfs/actions/workflows/build-cfs.yml)
+[![Build RTEMS 5](https://github.com/nasa/cFS/actions/workflows/build-cfs-rtems5.yml/badge.svg)](https://github.com/nasa/cFS/actions/workflows/build-cfs-rtems5.yml)
+
 ## Project Overview
 
  This system models a floating buoy that generates power through vertical oscillation in the North Sea. This repository contains the source code for this model and numerical modelling, focused on the optimization of a Point Absorber Wave Energy Converter (PAWEC).
