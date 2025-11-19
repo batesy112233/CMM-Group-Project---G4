@@ -7,7 +7,7 @@
     style="border-radius: 10px;"
   />
   <p><em>Numerical Modelling and Optimization for Point Absorber Wave Energy Converters</em></p>
-
+</div>
 
 ## Project Overview
 
