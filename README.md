@@ -39,12 +39,12 @@ You must have Python 3.8 or newer installed in your system
 
 **OR**  
 
-1. Open your terminal or command prompt.
+1. Open your terminal or command prompt (On Windows, Ctrl + R, then type cmd then press OK).
 2. Navigate to the directory where you want to store the project. e.g., type and run:
 ```bash
 cd Downloads
 ```
-3. Execute the git clone command, then go to the directory:
+3. Execute the git clone command, then go to the directory by entering:
 ```bash
 git clone https://github.com/batesy112233/CMM-Group-Project---G4
 ```
@@ -71,7 +71,7 @@ conda install numpy scipy matplotlib pandas
 python -m pip install numpy scipy matplotlib pandas
 ```
 _If you get the error: command `python` is not found, change "python"  to the file path of where Python is installed on your system._
-_i.e.: instead of python main.py, C:\Users\YourUserName\AppData\Local\Programs\Python\Python312\python.exe" main.py_
+_i.e.: instead of python ..., C:\Users\YourUserName\AppData\Local\Programs\Python\Python312\python.exe ..._
 ### Running the model
  
 * Open the project folder 'code' under 'CMM-Group-Project---G4' in your IDE 
@@ -128,7 +128,7 @@ This project employs the following numerical methods to handle the irregular nat
 
 ## Repository Structure
 
-The following table shows what each python file does.
+The following table shows what each file in the repository does.
 
 ### Core Simulation & Physics
 
