@@ -74,7 +74,7 @@ _If you get the error: command `python` is not found, change "python"  to the fi
 _i.e.: instead of python ..., C:\Users\YourUserName\AppData\Local\Programs\Python\Python312\python.exe ..._
 ### Running the model
  
-* Open the project folder 'code' under 'CMM-Group-Project---G4' in your IDE 
+* Open the project folder 'code' under 'CMM-Group-Project-G4' in your IDE 
 * Run the file **`main.py`** using your IDE's run command
 
 **OR**  
