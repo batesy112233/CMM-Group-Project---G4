@@ -49,7 +49,7 @@ cd Downloads
 git clone https://github.com/batesy112233/CMM-Group-Project-G4
 ```
 ```bash
-cd CMM-Group-Project---G4
+cd CMM-Group-Project-G4
 ```
 ### Dependencies
 Use an IDE (ie. ___Spyder___ ,recommended) to run the code.  
@@ -78,7 +78,7 @@ _i.e.: instead of python ..., C:\Users\YourUserName\AppData\Local\Programs\Pytho
 * Run the file **`main.py`** using your IDE's run command
 
 **OR**  
-* If using the terminal, ensure you are in the project's root directory ('code' in 'CMM-Group-Project---G4') by typing:
+* If using the terminal, ensure you are in the project's root directory ('code' in 'CMM-Group-Project-G4') by typing:
 ```bash
 cd code
 ```
