@@ -46,7 +46,7 @@ cd Downloads
 ```
 3. Execute the git clone command, then go to the directory by entering:
 ```bash
-git clone https://github.com/batesy112233/CMM-Group-Project---G4
+git clone https://github.com/batesy112233/CMM-Group-Project-G4
 ```
 ```bash
 cd CMM-Group-Project---G4
